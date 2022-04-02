@@ -24,7 +24,7 @@ const active = ref(false);
             :key="name"
             :product="items[0]"
             :count="cartStore.groupCount(name)"
-            @updateCount=""
+            @updateCount="cartStore.setItemCount(items[0], $event)"
             @clear="cartStore.removeThisItemFromCart(name)"
           />
         </ul>
@@ -35,7 +35,7 @@ const active = ref(false);
         <div class="flex justify-end">
           <AppButton @click="cartStore.$reset()" class="secondary mr-2">Clear Cart</AppButton>
           <!-- $reset() est une functio nde pinia qui remet le state a son etat initial  -->
-          <AppButton class="primary">Checkout</AppButton>
+          <AppButton @click="cartStore.checkout" class="primary">Checkout</AppButton>
         </div>
       </div>
       <!-- Uncomment and use condition to show when cart is empty -->
